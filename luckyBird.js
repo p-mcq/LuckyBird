@@ -4,8 +4,6 @@
 // Constants for game Settings
 const GAME_CANVAS_WIDTH = 288;
 const GAME_CANVAS_HEIGHT = 512;
-const SPACEBAR_KEY = " ";
-const GRAVITY = 1;
 
 // Game State Variables
 let gameCanvas;
@@ -54,6 +52,7 @@ let pipes = [];
 //#endregion
 
 //#endregion
+
 window.onload = function () {
     gameCanvas = document.getElementById("gameCanvas");
     ctx = gameCanvas.getContext("2d");
@@ -161,11 +160,9 @@ function Initalise() {
     const pipe2 = GeneratePipes(GAME_CANVAS_WIDTH * 1.5);
     pipes.push(pipe1, pipe2);
     slowDownTimerFillAmount = 1;
-
-    // requestAnimationFrame(Update);
 }
 
-
+// Generate the pipes for the game
 function GeneratePipes(x = GAME_CANVAS_WIDTH) {
     let topPipeHeight = Math.floor(Math.random() * 200) + 50;
     let bottomPipeHeight = GAME_CANVAS_HEIGHT - 20 - topPipeHeight - 85;
@@ -257,11 +254,9 @@ function Update() {
     // Clear the canvas
     ctx.clearRect(0, 0, GAME_CANVAS_WIDTH, GAME_CANVAS_HEIGHT);
 
-
     // draw the sky
     ctx.fillStyle = "LightBlue";
     ctx.fillRect(0, 0, GAME_CANVAS_WIDTH, GAME_CANVAS_HEIGHT - 20);
-
 
     // draw a lucky bird
     ctx.fillStyle = "green";
@@ -275,7 +270,7 @@ function Update() {
         bird.height / 2
     );
 
-    // gravity
+    // affect the bird's y position by gravity
     if (!pause) {
         HandleSlowMo();
     }
@@ -332,6 +327,7 @@ function Update() {
         bird.y = 0;
     }
 
+    // Update the slow down timer
     if (isSlowMo) {
         slowDownTimerFillAmount -= 0.01;
         if (slowDownTimerFillAmount < 0) {
