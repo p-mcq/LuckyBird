@@ -5,4 +5,5 @@ body {
 
 #gameCanvas {
     background-color: rgb(170, 4, 4);
+    border: 1px solid black;
 }
